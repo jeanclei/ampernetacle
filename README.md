@@ -21,18 +21,28 @@ if you want to develop or test applications on ARM.
 3. Have installed or [install terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/oci-get-started).
 4. Have installed or [install OCI CLI ](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm).
 5. Configure [OCI credentials](https://learn.hashicorp.com/tutorials/terraform/oci-build?in=terraform/oci-get-started).
-6. `terraform init`
-7. `terraform apply`
+6. Download this project and enter its folder.
+7. `terraform init`
+8. `terraform apply`
 
 That's it!
 
 At the end of the `terraform apply`, a `kubeconfig` file is generated
 in this directory. To use your new cluster, you can do:
 
+Linux
 ```bash
 export KUBECONFIG=$PWD/kubeconfig
 kubectl get nodes
 ```
+
+
+Windows
+```powershell
+$env:KUBECONFIG="$pwd\kubeconfig"
+kubectl get nodes
+```
+
 
 The command above should show you 4 nodes, named `node1` to `node4`.
 
@@ -42,10 +52,11 @@ you should see a command that you can use to SSH into the first VM
 
 ## Windows
 
-The `kubeconfig.tf` file currently uses UNIX-specific commands which
-don't work on Windows. (See #2.) I'm going to try and find a better
-way to get the kubeconfig file; but meanwhile, you could try to run
-it in WSL2. (Sorry!)
+It works with Windows 10/Powershell 5.1. 
+
+It may be necesssary to change the execution policy to unrestricted.
+
+[PowerShell ExecutionPolicy](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-5.1)
 
 ## Availability Domain
 
